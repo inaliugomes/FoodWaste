@@ -5,7 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="44bdbb34-182a-434a-9cfc-5fad219de636" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/app/database/connection.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/database/models.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/database/database.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/database/base.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
