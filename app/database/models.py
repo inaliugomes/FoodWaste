@@ -6,7 +6,7 @@ from enum import Enum
 from sqlalchemy.orm import Mapped
 from sqlalchemy.orm import mapped_column
 
-
+#Meu classe ENUM para que el utilizado solo puede eligir destas opciones
 class FoodNameEnum(str,Enum):
     lechuga = "Lechuga"
     tomate = "Tomate"
