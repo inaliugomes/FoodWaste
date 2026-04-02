@@ -7,7 +7,7 @@ from sqlalchemy.orm import Mapped
 from sqlalchemy.orm import mapped_column
 
 
-#Meu mis classes de datos
+# Responsable por transformar nuestra class en tablas de sql
 class FoodItem(Base):
     __tablename__ = "food_item"
     id:Mapped[int] = mapped_column(Integer,primary_key=True,index=True)

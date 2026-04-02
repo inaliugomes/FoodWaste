@@ -3,7 +3,7 @@ from datetime import datetime
 from typing import Optional
 from app.database.models import FoodNameEnum ,CategoryEnum
 
-
+#E o que informar a fastapi que tipo de dados estamos esperando receber
 class FoodItemBase(BaseModel):
     name: FoodNameEnum
     quantity:int = Field(...,ge=0)

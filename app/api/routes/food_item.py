@@ -3,8 +3,8 @@ from sqlalchemy.orm import Session
 
 from app.database.connection import get_db
 from app.database.models import FoodItem
-from app.schemas.food_item import FoodItemCreate, FoodItemUpdate, FoodItemResponse
-from app.crud.food_item import create_food_item
+from app.schemas.food_item import FoodItemCreate, FoodItemResponse
+from app.crud.food_item import create_food_item,get_all_food_items
 
 router = APIRouter(
     prefix="/food_item",
@@ -14,3 +14,8 @@ router = APIRouter(
 @router.post("/",response_model=FoodItemResponse)
 def create(item:FoodItemCreate, db:Session=Depends(get_db)):
     return create_food_item(db,item)
+
+
+@router.get("/",response_model=list[FoodItemResponse])
+def get_all(db:Session=Depends(get_db)):
+    return get_all_food_items(db)
