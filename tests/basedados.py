@@ -12,7 +12,7 @@ db = SessionLocal()
 #    weight_in_grams=200.0,
 #  category=CategoryEnum.pollo
 #)
-#db.add(item)
+#db.add(item)  uvicorn app.main:app --reload
 #db.commit()
 #db.refresh(item)
 

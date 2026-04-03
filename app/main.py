@@ -4,5 +4,6 @@ from app.database.base import Base
 from app.database.connection import engine
 
 app = FastAPI()
-Base.metadata.create_all(bind=engine)
 app.include_router(food_item.router)
+#Permite crear/validar si ya existe la base de datos
+Base.metadata.create_all(bind=engine)

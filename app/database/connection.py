@@ -4,7 +4,7 @@ from sqlalchemy import create_engine
 #Local where the database will be created
 DATABASE_URL = "sqlite:///./foodwaste.db"
 
-#Function that will handle de connection , to operate in database
+#Function that will handle de connection , to operate in database(Motor)
 engine = create_engine(DATABASE_URL,
                        connect_args=
                        {"check_same_thread":False})
