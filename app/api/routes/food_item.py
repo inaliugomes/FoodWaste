@@ -24,6 +24,6 @@ def get_all(db:Session=Depends(get_db)):
 def get_food(food_item_id:int,db:Session=Depends(get_db)):
     return get_food_item_by_id(db,food_item_id)
 
-@router.delete("/{food_item_id}",response_model=FoodItemResponse)
+@router.delete("/{food_item_id}")
 def delete(food_item_id:int,db:Session=Depends(get_db)):
     return delete_food_item_by_id(db,food_item_id)

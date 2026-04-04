@@ -29,6 +29,4 @@ def delete_food_item_by_id(db:Session,food_item_id:int):
         raise HTTPException(status_code=404, detail="FoodItem not found")
     db.delete(food_item)
     db.commit()
-    return food_item
-
-
+    return {"mensage":"FoodItem deleted successfully"}
