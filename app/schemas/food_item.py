@@ -20,6 +20,7 @@ class FoodItemResponse(FoodItemBase):
     created_at:datetime
 
 class FoodItemUpdate(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
     name: Optional[FoodNameEnum] = None
     quantity: Optional[int] = Field(None,ge=0)
     weight_in_grams: Optional[float] = Field(None,gt=0)

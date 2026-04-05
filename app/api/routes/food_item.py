@@ -3,8 +3,8 @@ from sqlalchemy.orm import Session
 
 from app.database.connection import get_db
 from app.database.models import FoodItem
-from app.schemas.food_item import FoodItemCreate, FoodItemResponse
-from app.crud.food_item import create_food_item,get_all_food_items,get_food_item_by_id,delete_food_item_by_id
+from app.schemas.food_item import FoodItemCreate, FoodItemResponse,FoodItemUpdate
+from app.crud.food_item import create_food_item,get_all_food_items,get_food_item_by_id,delete_food_item_by_id,update_food_item_by_id
 
 router = APIRouter(
     prefix="/food_item",
@@ -27,3 +27,8 @@ def get_food(food_item_id:int,db:Session=Depends(get_db)):
 @router.delete("/{food_item_id}")
 def delete(food_item_id:int,db:Session=Depends(get_db)):
     return delete_food_item_by_id(db,food_item_id)
+
+
+@router.put("/{food_item_id}",response_model=FoodItemResponse)
+def update(food_item_id:int,item:FoodItemUpdate,db:Session=Depends(get_db)):
+    return update_food_item_by_id(db,food_item_id,item)
