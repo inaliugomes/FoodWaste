@@ -1,5 +1,6 @@
 from fastapi import HTTPException
-from sqlalchemy.orm import Session, session
+from sqlalchemy.orm import Session
+
 from app.database.models import  FoodItem
 from app.schemas.food_item import FoodItemCreate,FoodItemUpdate
 
@@ -12,8 +13,10 @@ def create_food_item(db:Session,item:FoodItemCreate):
     return db_item
 
 #Search for all element
-def get_all_food_items(db:Session):
-    return db.query(FoodItem).all()
+def get_all_food_items(db:Session,skip:int=0,limit:int=10):
+
+    return db.query(FoodItem).offset(skip).limit(limit).all()
+
 
 #Get element By ID
 def get_food_item_by_id(db:Session,food_item_id:int):

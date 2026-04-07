@@ -1,4 +1,4 @@
-from sqlalchemy import DateTime, Integer, Float
+from sqlalchemy import DateTime, Integer, Float,String
 from sqlalchemy import Enum as SQLAEnum
 from datetime import datetime
 from app.database.base import Base
@@ -18,3 +18,8 @@ class FoodItem(Base):
     created_at:Mapped[datetime] = mapped_column(DateTime,default=datetime.utcnow,nullable=False)
 
 
+
+class User(Base):
+    __tablename__ = "user"
+    id:Mapped[int] = mapped_column(Integer,primary_key=True,index=True)
+    name:Mapped[str] = mapped_column(String,nullable=False)

@@ -1,8 +1,8 @@
-from fastapi import Depends , APIRouter
+from fastapi import Depends , APIRouter,Query
 from sqlalchemy.orm import Session
+from typing import Annotated
 
 from app.database.connection import get_db
-from app.database.models import FoodItem
 from app.schemas.food_item import FoodItemCreate, FoodItemResponse,FoodItemUpdate
 from app.crud.food_item import create_food_item,get_all_food_items,get_food_item_by_id,delete_food_item_by_id,update_food_item_by_id
 
@@ -17,8 +17,8 @@ def create(item:FoodItemCreate, db:Session=Depends(get_db)):
 
 
 @router.get("/",response_model=list[FoodItemResponse])
-def get_all(db:Session=Depends(get_db)):
-    return get_all_food_items(db)
+def get_all(skip:Annotated[int,Query(ge=0)]=0,limit:Annotated[int,Query(ge=0,le=10)]=10,db:Session=Depends(get_db)):
+    return get_all_food_items(db,skip=skip,limit=limit)
 
 @router.get("/{food_item_id}",response_model=FoodItemResponse)
 def get_food(food_item_id:int,db:Session=Depends(get_db)):

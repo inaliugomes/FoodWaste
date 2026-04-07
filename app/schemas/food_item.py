@@ -25,3 +25,8 @@ class FoodItemUpdate(BaseModel):
     quantity: Optional[int] = Field(None,ge=0)
     weight_in_grams: Optional[float] = Field(None,gt=0)
     category:Optional[CategoryEnum] = None
+
+class FilterParams(FoodItemResponse):
+    foods:list[FoodItemBase]
+    limit: int = Field(100,ge=0)
+    skip: int = Field(0,ge=0)
