@@ -1,6 +1,6 @@
 from fastapi import HTTPException
 from sqlalchemy.orm import Session
-
+from app.core.enums import  FoodNameEnum,CategoryEnum
 from app.database.models import  FoodItem
 from app.schemas.food_item import FoodItemCreate,FoodItemUpdate
 
@@ -13,11 +13,25 @@ def create_food_item(db:Session,item:FoodItemCreate):
     return db_item
 
 #Search for all element
-def get_all_food_items(db:Session,skip:int=0,limit:int=10):
+def get_all_food_items(
+                       db:Session,
+                       skip:int=0,
+                       limit:int=10,
+                       food_name:FoodNameEnum |None=None,
+                       food_category:CategoryEnum |None =None,
+                       food_quantity:int |None=None
+                       ):
+    query = db.query(FoodItem)
+    if food_name:
+        query = query.filter(FoodItem.name == food_name)
 
-    return db.query(FoodItem).offset(skip).limit(limit).all()
+    if food_category:
+        query = query.filter(FoodItem.category == food_category)
 
+    if food_quantity is not None:
+        query = query.filter(FoodItem.quantity >= food_quantity)
 
+    return query.offset(skip).limit(limit).all()
 #Get element By ID
 def get_food_item_by_id(db:Session,food_item_id:int):
     food_item = db.query(FoodItem).filter(FoodItem.id == food_item_id).first()
