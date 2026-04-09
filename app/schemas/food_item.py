@@ -26,6 +26,10 @@ class FoodItemUpdate(BaseModel):
     weight_in_grams: Optional[float] = Field(None,gt=0)
     category:Optional[CategoryEnum] = None
 
+class FoodItemListResponse(BaseModel):
+    total: int
+    items: list[FoodItemResponse]
+
 class FilterParams(FoodItemResponse):
     foods:list[FoodItemBase]
     limit: int = Field(100,ge=0)

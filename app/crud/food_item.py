@@ -31,7 +31,9 @@ def get_all_food_items(
     if food_quantity is not None:
         query = query.filter(FoodItem.quantity >= food_quantity)
 
-    return query.offset(skip).limit(limit).all()
+    total = query.count()
+    items = query.offset(skip).limit(limit).all()
+    return {"total": total, "items": items}
 #Get element By ID
 def get_food_item_by_id(db:Session,food_item_id:int):
     food_item = db.query(FoodItem).filter(FoodItem.id == food_item_id).first()
