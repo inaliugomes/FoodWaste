@@ -3,7 +3,7 @@ from sqlalchemy.orm import Session
 from typing import Annotated
 from app.core.enums import FoodNameEnum, CategoryEnum
 from app.database.connection import get_db
-from app.schemas.food_item import FoodItemCreate, FoodItemResponse,FoodItemUpdate
+from app.schemas.food_item import FoodItemCreate, FoodItemResponse, FoodItemUpdate, FoodItemListResponse
 from app.crud.food_item import create_food_item,get_all_food_items,get_food_item_by_id,delete_food_item_by_id,update_food_item_by_id
 
 router = APIRouter(
@@ -16,7 +16,7 @@ def create(item:FoodItemCreate, db:Session=Depends(get_db)):
     return create_food_item(db,item)
 
 
-@router.get("/",response_model=list[FoodItemResponse])
+@router.get("/", response_model=FoodItemListResponse)
 def get_all(skip:Annotated[int,Query(ge=0)]=0,
             limit:Annotated[int,Query(ge=0,le=10)]=10,
             food_name:Annotated[FoodNameEnum | None,Query()]=None,
