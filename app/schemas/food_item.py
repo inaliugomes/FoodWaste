@@ -12,11 +12,12 @@ class FoodItemBase(BaseModel):
 
 
 class FoodItemCreate(FoodItemBase):
-    pass
+    user_id: int
 
 class FoodItemResponse(FoodItemBase):
     model_config = ConfigDict(from_attributes=True)
     id : int
+    user_id:int
     created_at:datetime
 
 class FoodItemUpdate(BaseModel):
@@ -30,7 +31,3 @@ class FoodItemListResponse(BaseModel):
     total: int
     items: list[FoodItemResponse]
 
-class FilterParams(FoodItemResponse):
-    foods:list[FoodItemBase]
-    limit: int = Field(100,ge=0)
-    skip: int = Field(0,ge=0)
