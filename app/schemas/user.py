@@ -22,4 +22,4 @@ class UserUpdateResponse(BaseModel):
 
 class FoodUserListResponse(BaseModel):
     total:int
-    items:list[UserItemResponse]
+    users:list[UserItemResponse]
