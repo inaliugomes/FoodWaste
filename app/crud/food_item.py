@@ -2,10 +2,16 @@ from fastapi import HTTPException
 from sqlalchemy.orm import Session
 from app.core.enums import  FoodNameEnum,CategoryEnum
 from app.database.models import  FoodItem
+from app.database.models import User
 from app.schemas.food_item import FoodItemCreate,FoodItemUpdate
 
 #Create Element
 def create_food_item(db:Session,item:FoodItemCreate):
+    user = db.query(User).filter(User.id == item.user_id).first()
+
+    if not user:
+        raise HTTPException(status_code=404, detail="This user does not exist")
+
     db_item = FoodItem(**item.model_dump())
     db.add(db_item)
     db.commit()

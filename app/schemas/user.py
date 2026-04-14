@@ -20,6 +20,6 @@ class UserUpdateResponse(BaseModel):
     name : Optional[str] =None
     unique_Code : Optional[int] =None
 
-class FoodUserListResponse(BaseModel):
+class UserListResponse(BaseModel):
     total:int
     users:list[UserItemResponse]
