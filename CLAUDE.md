@@ -31,13 +31,16 @@ This is a **FastAPI + SQLAlchemy + SQLite** REST API for tracking food items to 
 - `app/core/enums.py` — `FoodNameEnum` and `CategoryEnum` define the allowed food names and categories. Adding a new food or category means adding a value here first.
 - `app/database/base.py` — `DeclarativeBase` used by all models.
 - `app/database/connection.py` — SQLite engine + `SessionLocal` + `get_db()` dependency. DB file is `foodwaste.db` at the repo root.
-- `app/database/models.py` — SQLAlchemy ORM models (`FoodItem`, `User`). Imports enums from `app.core.enums`.
-- `app/schemas/food_item.py` — Pydantic schemas for request/response validation (`FoodItemCreate`, `FoodItemResponse`, `FoodItemUpdate`).
-- `app/crud/food_item.py` — All database operations. Raises `HTTPException` directly on 404s.
-- `app/api/routes/food_item.py` — Route handlers under `/food_item` prefix. Delegates all logic to crud functions.
+- `app/database/models.py` — SQLAlchemy ORM models (`FoodItem`, `User`). `FoodItem` has a required FK to `User.id` via `user_id`. Deleting a `User` with associated `FoodItem`s is blocked (409).
+- `app/schemas/` — Pydantic schemas for request/response validation. Each resource has its own file (`food_item.py`, `user.py`).
+- `app/crud/` — All database operations per resource. Raises `HTTPException` directly on 404s/409s.
+- `app/api/routes/` — Route handlers per resource. Delegates all logic to crud functions.
 
 **Request flow:** Route handler → crud function → SQLAlchemy session → SQLite
 
-**Filtering:** `GET /food_item/` supports `food_name`, `food_category`, and `food_quantity` (minimum quantity) query params, plus `skip`/`limit` for pagination (max limit: 10).
+**Resources:**
+
+- `/food_item` — Full CRUD. `POST` requires a valid `user_id`. `GET /` supports `food_name`, `food_category`, and `food_quantity` (minimum quantity) query params, plus `skip`/`limit` pagination (max limit: 10).
+- `/user` — Create, list all, get by ID, delete. `UserCreate` requires `name` (min 4 chars) and `unique_Code` (int ≥ 0). A user with associated food items cannot be deleted.
 
 **No migration tool is used** — schema changes require either deleting `foodwaste.db` or manually altering the SQLite file, since `create_all` only creates missing tables.
