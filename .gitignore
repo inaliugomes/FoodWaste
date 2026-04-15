@@ -1,3 +1,22 @@
 .idea/
 TASKS.md
 TESTE_CONHECIMENTO.md
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environments
+venv/
+.venv/
+env/
+
+# Database
+*.db
+*.sqlite3
+
+# Environment variables
+.env
+.env.*
