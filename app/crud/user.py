@@ -1,7 +1,7 @@
 from fastapi import HTTPException
 from sqlalchemy.orm import Session
 from app.database.models import User
-from app.schemas.user import UserCreate
+from app.schemas.user import UserCreate,UserUpdate
 
 def create_user(user:UserCreate,db:Session):
     db_user = User(**user.model_dump())
@@ -37,3 +37,19 @@ def delete_user_by_id(user_id:int, db:Session):
     db.delete(user)
     db.commit()
     return {"mensage":"User deleted successfully"}
+
+def update_user_by_id(user_id:int,user:UserUpdate,db:Session):
+
+    user_item = db.query(User).filter(User.id == user_id).first()
+
+    if not user_item:
+        raise HTTPException(status_code=404, detail="User not found")
+
+    update_data = user.model_dump(exclude_unset=True)
+
+    for key, value in update_data.items():
+        setattr(user_item, key, value)
+    db.commit()
+    db.refresh(user_item)
+
+    return user_item

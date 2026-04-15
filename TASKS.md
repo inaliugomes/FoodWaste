@@ -56,7 +56,7 @@ React + Vite + TailwindCSS (leve, rápido de desenvolver, bom para dashboards)
 
 ## Ordem sugerida
 
-1. CORS → interface web consegue chamar a API
+1. CORS → interface web consegue chamar a API -> Feito
 2. `unique_Code` constraint + `update_user`
 3. Variáveis de ambiente (`.env`)
 4. Início do frontend (Dashboard + Food Items)
