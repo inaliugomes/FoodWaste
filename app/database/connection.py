@@ -1,8 +1,13 @@
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy import create_engine
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
 
 #Local where the database will be created
-DATABASE_URL = "sqlite:///./foodwaste.db"
+DATABASE_URL = os.getenv("DATABASE_URL")
 
 #Function that will handle de connection , to operate in database(Motor)
 engine = create_engine(DATABASE_URL,
