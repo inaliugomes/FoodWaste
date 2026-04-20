@@ -1,15 +1,16 @@
-import FoodItems from "./pages/FoodItems"
+import NavBar from "./components/Navbar"
+import Layout from "./components/layout"
 
-function App(){
-
+function App() {
     return (
-
-        <>
-        <FoodItems />
-        </>
+        <Layout>
+            <p>Test children</p>
+            <p>Test children</p>
+            <p>Test children</p>
+            <p>Test children</p>
+        
+        </Layout>
     )
-
 }
 
 export default App
-
