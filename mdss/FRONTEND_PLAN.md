@@ -256,7 +256,7 @@ em cada componente.
 - [x] 1.6 — Criar `UserForm.jsx` (HTML)
 
 ### Fase 2 — React
-- [ ] 2.1 — Formulários controlados
+- [x] 2.1 — Formulários controlados
 - [ ] 2.2 — Loading e erro (estados loading/error já implementados em FoodItems.jsx — rever conceitos)
 - [ ] 2.3 — React Router DOM
 - [ ] 2.4 — Página Users
@@ -276,4 +276,13 @@ em cada componente.
 - `Navbar.jsx` criado de raiz (estava vazio)
 - `layout.jsx` completo — recebe `children`, renderiza `NavBar` + `main`
 - `FoodItemCard.jsx` completo — destructuring de props, `new Date().toLocaleDateString()` para a data
-- Próximo passo: `UserCard.jsx` (1.4) e depois `UserForm.jsx` (1.6)
+
+## Notas de sessão (2026-04-22)
+
+- `FoodItems.jsx` — `FoodItemCard` ligado com props explícitas (sem spread), `key={item.id}` adicionado
+- `UserCard.jsx` criado — destructuring de `name` e `unique_Code`
+- `Users.jsx` criado — mesmo padrão de `useEffect` + `useState` + loading/error
+- `userService.js` completo — `getAllUser()` chama `GET /user`
+- `FoodItemForm.jsx` — formulário controlado completo: `useState` com objecto, `value` + `onChange` em todos os campos, `onSubmit` com `e.preventDefault()` + `console.log(formData)` a funcionar
+- `UserForm.jsx` criado — estrutura HTML com `name` e `unique_Code`
+- Próximo passo: 2.2 — substituir o `console.log` pelo `POST /food_item` real, depois React Router (2.3)
