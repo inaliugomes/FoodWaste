@@ -34,7 +34,14 @@ function FoodItems(){
             {
                 data.map(
                     item => (
-                        <li key = {item.id}>{item.name}</li>
+                       < FoodItemCard 
+                       key={item.id}
+                       name={item.name} 
+                       quantity={item.quantity} 
+                       weight_in_grams={item.weight_in_grams}
+                       category={item.category}
+                       created_at={item.created_at} 
+                       />
                     )
                 )
             }
