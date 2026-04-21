@@ -1,14 +1,14 @@
 import NavBar from "./components/Navbar"
 import Layout from "./components/layout"
+import FoodItems from "./pages/FoodItems"
+import { getAllFoodItems } from "./services/foodItemService"
 
 function App() {
+
+  
     return (
         <Layout>
-            <p>Test children</p>
-            <p>Test children</p>
-            <p>Test children</p>
-            <p>Test children</p>
-        
+           <FoodItems />
         </Layout>
     )
 }
