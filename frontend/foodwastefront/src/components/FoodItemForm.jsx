@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { postFoodItem } from "../services/foodItemService"
 
 function FoodItemForm(){
 
@@ -11,9 +12,20 @@ function FoodItemForm(){
     return ( 
        <div>
         <form onSubmit={
-            e => {
+            async e => {
                 e.preventDefault()
-                console.log(formData)
+                const payload = {
+                    ...formData,
+                    quantity:Number(formData.quantity),
+                    weight_in_grams:Number(formData.weight_in_grams),
+                    user_id:Number(formData.user_id)
+                }
+                try {
+                    await postFoodItem(payload)
+                    console.log("Criado com successo")
+                }catch(err) {
+                    console.error(err)
+                }
             }
         }>
             <label htmlFor="name">Nome</label><br />

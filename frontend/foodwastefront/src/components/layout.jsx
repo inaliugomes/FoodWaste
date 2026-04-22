@@ -1,5 +1,6 @@
 import NavBar from "./Navbar"
 
+
 /* Childen as dynamic content*/
 function Layout({children}){
 
