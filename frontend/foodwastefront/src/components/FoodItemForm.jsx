@@ -1,7 +1,7 @@
 import { useState } from "react"
 import { postFoodItem } from "../services/foodItemService"
 
-function FoodItemForm(){
+function FoodItemForm({onSuccess}){
 
     const [formData,setFormData] = useState({"name":"",
         "quantity":"",
@@ -23,6 +23,7 @@ function FoodItemForm(){
                 try {
                     await postFoodItem(payload)
                     console.log("Criado com successo")
+                    onSuccess()
                 }catch(err) {
                     console.error(err)
                 }
