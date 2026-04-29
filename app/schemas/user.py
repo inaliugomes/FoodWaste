@@ -7,9 +7,11 @@ from typing import Optional
 class User(BaseModel):
     name:str = Field(min_length=4)
     unique_Code:int = Field(...,ge=1000,le=9999)
+    
 
 class UserCreate(User):
-    pass
+    
+    password:str = Field(min_length=5)
 
 class UserItemResponse(User):
     model_config = ConfigDict(from_attributes=True)
