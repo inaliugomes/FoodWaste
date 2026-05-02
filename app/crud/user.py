@@ -2,9 +2,14 @@ from fastapi import HTTPException
 from sqlalchemy.orm import Session
 from app.database.models import User
 from app.schemas.user import UserCreate,UserUpdate
+from app.core.security import hash_password
 
 def create_user(user:UserCreate,db:Session):
-    db_user = User(**user.model_dump())
+    db_user = User(
+        name=user.name,
+        unique_Code=user.unique_Code,
+        hashed_password=hash_password(user.password)
+    )
     db.add(db_user)
     db.commit()
     db.refresh(db_user)
