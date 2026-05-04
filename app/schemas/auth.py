@@ -2,7 +2,7 @@ from pydantic import BaseModel,Field
 
 
 class LoginRequest(BaseModel):
-    name:str = Field(min_length=4)
+    unique_Code:int = Field(...,ge=1000,le=9999)
     password: str = Field(min_length=5)
 
 class TokenResponse(BaseModel):

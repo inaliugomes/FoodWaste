@@ -1,5 +1,5 @@
 from fastapi import FastAPI
-from app.api.routes import food_item,user
+from app.api.routes import food_item, user, auth
 from app.database.base import Base
 from app.database.connection import engine
 from fastapi.middleware.cors import CORSMiddleware
@@ -22,3 +22,4 @@ app.add_middleware(
 
 app.include_router(food_item.router)
 app.include_router(user.router)
+app.include_router(auth.router)
