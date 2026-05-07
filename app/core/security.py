@@ -2,6 +2,7 @@ import bcrypt
 from datetime import datetime,timedelta
 from jose import jwt
 from dotenv import load_dotenv
+from fastapi.security import OAuth2PasswordBearer
 
 import os
 
@@ -11,6 +12,8 @@ SECRET_KEY = os.getenv("SECRET_KEY")
 
 ALGORITHM  = "HS256"
 ACCESS_TOKEN_EXPIRE_MINUTES = 30
+
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/login")
 
 #Generacion del Hash del password
 def hash_password(password:str) -> str:
