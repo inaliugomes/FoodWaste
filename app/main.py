@@ -5,7 +5,7 @@ from app.database.connection import engine
 from fastapi.middleware.cors import CORSMiddleware
 
 app = FastAPI()
-#Permite crear/validar si ya existe la base de datos
+#Creates the database tables if they do not exist yet
 Base.metadata.create_all(bind=engine)
 origins = [
     "http://localhost:3000",

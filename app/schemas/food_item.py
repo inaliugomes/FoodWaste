@@ -1,9 +1,9 @@
 from pydantic import BaseModel , ConfigDict , Field
 from datetime import datetime
 from typing import Optional
-from app.database.models import FoodNameEnum ,CategoryEnum
+from app.core.enums import FoodNameEnum ,CategoryEnum
 
-#Valido para que FASTAPI sepa que tipo de datos estamos esperando recibir
+#Defines the expected data types for incoming requests
 class FoodItemBase(BaseModel):
     name: FoodNameEnum
     quantity:int = Field(...,ge=0)

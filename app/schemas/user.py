@@ -10,7 +10,6 @@ class User(BaseModel):
     
 
 class UserCreate(User):
-    
     password:str = Field(min_length=5)
 
 class UserItemResponse(User):

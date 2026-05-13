@@ -1,6 +1,6 @@
 from enum import Enum
 
-#Meu classe ENUM para que el utilizado solo puede eligir destas opciones
+#Enum class so the user can only choose from these options
 class FoodNameEnum(str,Enum):
     lechuga = "Lechuga"
     tomate = "Tomate"

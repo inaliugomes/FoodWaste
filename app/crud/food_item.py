@@ -62,7 +62,7 @@ def update_food_item_by_id(db:Session,food_item_id:int,item:FoodItemUpdate):
 
     if not food_item:
         raise HTTPException(status_code=404, detail="FoodItem to updade not found")
-    #transform o objeto python en json
+    #transforms the python object into a dictionary
 
     update_data =  item.model_dump(exclude_unset=True)
 
