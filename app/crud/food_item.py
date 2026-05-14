@@ -6,13 +6,8 @@ from app.database.models import User
 from app.schemas.food_item import FoodItemCreate,FoodItemUpdate
 
 #Create Element
-def create_food_item(db:Session,item:FoodItemCreate):
-    user = db.query(User).filter(User.id == item.user_id).first()
-
-    if not user:
-        raise HTTPException(status_code=404, detail="This user does not exist")
-
-    db_item = FoodItem(**item.model_dump())
+def create_food_item(db:Session,item:FoodItemCreate,current_user:User):
+    db_item = FoodItem(**item.model_dump(), user_id=current_user.id)
     db.add(db_item)
     db.commit()
     db.refresh(db_item)
@@ -48,20 +43,27 @@ def get_food_item_by_id(db:Session,food_item_id:int):
 
     return food_item
 
-def delete_food_item_by_id(db:Session,food_item_id:int):
+def delete_food_item_by_id(db:Session,food_item_id:int,current_user:User):
     food_item = db.query(FoodItem).filter(FoodItem.id == food_item_id).first()
     if not food_item:
         raise HTTPException(status_code=404, detail="FoodItem not found")
+
+    if food_item.user_id != current_user.id:
+        raise HTTPException(status_code=403, detail="You can't delete a item that does not belong to you")
+
     db.delete(food_item)
     db.commit()
     return {"mensage":"FoodItem deleted successfully"}
 
 
-def update_food_item_by_id(db:Session,food_item_id:int,item:FoodItemUpdate):
+def update_food_item_by_id(db:Session,food_item_id:int,item:FoodItemUpdate,current_user:User):
     food_item = db.query(FoodItem).filter(FoodItem.id == food_item_id).first()
 
     if not food_item:
         raise HTTPException(status_code=404, detail="FoodItem to updade not found")
+
+    if food_item.user_id != current_user.id:
+        raise HTTPException(status_code=403, detail="You can't update a item that does not belong to you")
     #transforms the python object into a dictionary
 
     update_data =  item.model_dump(exclude_unset=True)

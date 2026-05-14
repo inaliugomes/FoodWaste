@@ -22,7 +22,7 @@ def get_all_user(db:Session = Depends(get_db),current_user: User = Depends(get_c
 def get_user(user_id:int, db:Session = Depends(get_db),current_user: User = Depends(get_current_user)):
     return get_user_by_id(user_id,db)
 
-@router.delete("/{user_id}", response_model=UserItemResponse)
+@router.delete("/{user_id}")
 def delete_user(user_id:int, db:Session = Depends(get_db),current_user: User = Depends(get_current_user)):
 
     return delete_user_by_id(user_id,db)

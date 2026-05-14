@@ -12,7 +12,7 @@ class FoodItemBase(BaseModel):
 
 
 class FoodItemCreate(FoodItemBase):
-    user_id: int
+    pass
 
 class FoodItemResponse(FoodItemBase):
     model_config = ConfigDict(from_attributes=True)

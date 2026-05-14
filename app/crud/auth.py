@@ -1,19 +1,19 @@
 from fastapi.params import Depends
+from fastapi.security import OAuth2PasswordRequestForm
 from jose import jwt,JWTError
 from app.database.connection import get_db
-from app.schemas.auth import LoginRequest
 from sqlalchemy.orm import Session
 from app.core.security import verify_password, create_access_token, oauth2_scheme, SECRET_KEY
 from app.database.models import User
 from fastapi import HTTPException
 
-def response_token_validator(request:LoginRequest,db:Session,):
-    user = db.query(User).filter(User.unique_Code == request.unique_Code).first()
+def response_token_validator(form: OAuth2PasswordRequestForm, db: Session):
+    user = db.query(User).filter(User.unique_Code == int(form.username)).first()
 
     if not user:
         raise HTTPException(status_code=404, detail="User not found")
 
-    correct_password = verify_password(request.password, user.hashed_password)
+    correct_password = verify_password(form.password, user.hashed_password)
 
     if not correct_password:
         raise HTTPException(status_code=401, detail="The User unique Code or Password is wrong")
