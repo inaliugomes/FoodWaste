@@ -16,7 +16,7 @@ def response_token_validator(request:LoginRequest,db:Session,):
     correct_password = verify_password(request.password, user.hashed_password)
 
     if not correct_password:
-        raise HTTPException(status_code=401, detail="Incorrect Password")
+        raise HTTPException(status_code=401, detail="The User unique Code or Password is wrong")
 
     return create_access_token({"sub": str(user.id)})
 
