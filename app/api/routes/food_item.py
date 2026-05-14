@@ -14,7 +14,7 @@ router = APIRouter(
 )
 
 @router.post("/",response_model=FoodItemResponse)
-def create(item:FoodItemCreate, db:Session=Depends(get_db)):
+def create(item:FoodItemCreate, db:Session=Depends(get_db),current_user: User = Depends(get_current_user)):
     return create_food_item(db,item)
 
 
@@ -32,14 +32,14 @@ def get_all(skip:Annotated[int,Query(ge=0)]=0,
 
 
 @router.get("/{food_item_id}",response_model=FoodItemResponse)
-def get_food(food_item_id:int,db:Session=Depends(get_db)):
+def get_food(food_item_id:int,db:Session=Depends(get_db),current_user: User = Depends(get_current_user)):
     return get_food_item_by_id(db,food_item_id)
 
 @router.delete("/{food_item_id}")
-def delete(food_item_id:int,db:Session=Depends(get_db)):
+def delete(food_item_id:int,db:Session=Depends(get_db),current_user: User = Depends(get_current_user)):
     return delete_food_item_by_id(db,food_item_id)
 
 
 @router.put("/{food_item_id}",response_model=FoodItemResponse)
-def update(food_item_id:int,item:FoodItemUpdate,db:Session=Depends(get_db)):
+def update(food_item_id:int,item:FoodItemUpdate,db:Session=Depends(get_db),current_user: User = Depends(get_current_user)):
     return update_food_item_by_id(db,food_item_id,item)

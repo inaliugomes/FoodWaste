@@ -65,7 +65,7 @@ def update_food_item_by_id(db:Session,food_item_id:int,item:FoodItemUpdate):
     #transforms the python object into a dictionary
 
     update_data =  item.model_dump(exclude_unset=True)
-
+    #Listener, que siempre esta escuchando y validando los cambios
     for key, value in update_data.items():
         setattr(food_item, key, value)
 
